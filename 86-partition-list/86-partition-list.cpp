@@ -12,39 +12,28 @@ class Solution {
 public:
     ListNode* partition(ListNode* head, int x) {
         
-        vector<int> ls,gr;
+        ListNode *left = new ListNode(0) , *right = new ListNode(0) , *l = left , *r = right;
+        ListNode *cur = head;
         
-        ListNode* a = head;
-        
-        while(a!= NULL)
+        while(cur != NULL)
         {
-            if(a->val < x) ls.push_back(a->val);
-            else gr.push_back(a->val);
-            
-            a = a ->next;
-        }
-        
-        ListNode* temp = head;
-        
-        int i = 0 , j = 0;
-        while(temp != NULL)
-        {
-            
-            // cout << i << " " << j << endl;
-            if(i < ls.size())
+            if(cur->val < x)
             {
-                temp->val = ls[i];
-                i++;
+                l->next = cur;
+                l = cur;
             }else
             {
-                temp->val = gr[j];
-                j++;
+                r->next = cur;
+                r = cur;
             }
             
-            temp = temp->next;
+            cur = cur->next;
         }
         
-        return head;
+        l->next = right->next;
+        r->next = NULL;
+        
+        return left->next;
         
     }
 };
