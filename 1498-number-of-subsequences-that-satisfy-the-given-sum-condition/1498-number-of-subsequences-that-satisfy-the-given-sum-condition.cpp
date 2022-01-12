@@ -11,7 +11,7 @@ public:
         for(int i=1;i<=n;i++)
         {
             pow2[i]=(2*pow2[i-1])%mod;
-            cout<< pow2[i] << " ";
+            // cout<< pow2[i] << " ";
         }
         
         while(i<=j)
