@@ -37,10 +37,8 @@ public:
                 break;
             }
             
-            cout << score << " " << power << " " << token[start] << " " << token[end] << endl;
             
              maxx = max(maxx , score);
-            cout << maxx << " " << score << endl;
         }
         
         return maxx;
