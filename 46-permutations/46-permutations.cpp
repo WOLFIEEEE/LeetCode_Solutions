@@ -3,24 +3,29 @@ public:
     
     vector<vector<int>> ans;
     
-    void per(vector<int> &nums , int index)
+    void per(vector<int> &nums , vector<int> temp , vector<bool> freq)
     {
-        if(index >= nums.size())
+        if(temp.size() == nums.size())
         {
-            ans.push_back(nums);
-            return;
+            ans.push_back(temp);
         }
         
-        for(int i = index ; i < nums.size() ; i++)
+        for(int i = 0 ; i < nums.size() ; i++)
         {
-            swap(nums[i] , nums[index]);
-            per(nums , index+1);
-            swap(nums[i] , nums[index]);
+            if(freq[i])
+            {
+                temp.push_back(nums[i]);
+                freq[i] = false;
+                per(nums , temp , freq);
+                freq[i] = true;
+                temp.pop_back();
+            }
         }
     }
     vector<vector<int>> permute(vector<int>& nums) {
         
-        per(nums , 0);
+        vector<bool> freq(nums.size() , true);
+        per(nums , {} , freq);
         return ans;
         
     }
