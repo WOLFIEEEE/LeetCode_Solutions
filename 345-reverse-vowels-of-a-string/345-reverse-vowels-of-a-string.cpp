@@ -7,26 +7,37 @@ public:
     }
     string reverseVowels(string s) {
         
-        string temp;
-        
-        for(auto it:s)
-        {
-            if(isvowel(it))
-            {
-                temp += it;
-            }
-        }
-        
-        int n = s.size();
-        
         int i = 0;
+        int j = s.length()-1;
         
-        for(int j = n-1 ; j >= 0 ; j--)
+        
+        bool front = true;
+        bool complete = false;
+        while(i < j)
         {
-            if(isvowel(s[j]))
+            
+            // cout<< i << " " << j << endl;
+            if(front)
             {
-                s[j] = temp[i];
-                i++;
+                if(isvowel(s[i]))
+                {
+                    front = false;
+                }else
+                {
+                    i++;
+                }
+            }else
+            {
+                if(isvowel(s[j]))
+                {
+                    swap(s[i] , s[j]);
+                    i++;
+                    j--;
+                    front = true;
+                }else
+                {
+                    j--;
+                }
             }
         }
         
