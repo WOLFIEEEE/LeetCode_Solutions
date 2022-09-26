@@ -1,17 +1,37 @@
 class Solution {
-    int uf[26];
-    int find(int x) {
-        return uf[x] == x ? x : (uf[x] = find(uf[x]));
-    }
 public:
+    
+    int vf[26];
+    
+    int find(int x)
+    {
+        return vf[x] == x ? x : vf[x] = find(vf[x]);
+    }
+    
     bool equationsPossible(vector<string>& equations) {
-        for (int i = 0; i < 26; ++i) uf[i] = i;
-        for (auto e : equations) {
-            if (e[1] == '=') uf[find(e[0] - 'a')] = find(e[3] - 'a'); 
+        
+        for(int i = 0 ; i < 26 ; i++)
+        {
+            vf[i] = i;
         }
-        for (auto e : equations) {
-            if (e[1] == '!' && find(e[0] - 'a') == find(e[3] - 'a')) return false;
+        
+        for(auto it : equations)
+        {
+            if(it[1] == '=')
+            {
+                vf[find(it[0] - 'a')] = find(it[3] - 'a');
+            }
         }
+        
+        for(auto it: equations)
+        {
+            if(it[1] == '!')
+            {
+                if(vf[find(it[3]-'a')] == vf[find(it[0]-'a')]) return false;
+            }
+        }
+        
         return true;
+        
     }
 };
