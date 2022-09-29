@@ -5,11 +5,8 @@ public:
         int i = 0;
         int j = arr.size()-1;
         
-        while(abs(i-j) >= k)
+        while(j-i >= k)
         {
-            
-            // cout << abs(arr[i]-x) << " " << abs(arr[j]-x) << endl;
-            //  cout << i << " " << j << endl;
             if(abs(arr[i]-x) < abs(arr[j]-x))
             {
                 j--;
@@ -29,15 +26,10 @@ public:
         }
         
         vector<int> ans;
-        
-        cout << i << j << endl;
         int lastindex = arr.size()-1;
         
         ans.assign(arr.begin()+i , arr.end()-lastindex+j);
         
-        return ans;
-        
-        
-        
+        return ans;    
     }
 };
